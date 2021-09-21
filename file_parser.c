@@ -37,32 +37,62 @@ void open_file(char *file_name)
 
 void parse_file(FILE *monty_file)
 {
-	int line;
+	int line_number;
 	size_t buf;
 	/* default mode stack */
+	int mode;
+	char *p_line;
+
 	mode = 0;
-	
-	/* check for errors */
-	for (line = 1; getline(&p_line, &buf, monty_file != EOF; line++)  
+	p_line = NULL;
+	buf = 0;
+
+	/* cant open file */
+	if (monty_file == NULL)
+		error_handle(7, monty_file);
+
+	/* walk file */
+	for (line_number = 1; getline(&p_line, &buf, monty_file) != EOF; line_number++)  
 	{
-		line_slice = parse_line(p_line, line, mode);
+		line_slice = parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
 
 
-int parse_line(char *p_line, int line, line_slice)
+int parse_line(char *p_line, int line_number, int mode)
 {
+	char *opcode
+	char *data
+	const char *separator
 
-	/* do the strok  */
+	if (p_line == NULL)
+		error_handle(6);
+
+	separator ="\n ";
+	opcode = strtok(p_line, separator);
+
+	/* no content in line */
+	if (opcode == NULL)
+		return (0);
+	data = strtok(NULL, separator);
+
+	/* select mode */
+	if (strcmp(opcode, "queue") == 0)
+		mode = 1;
+		return (1);
+	else if (strcmp(opcode, "stack") == 0)
+		mode = 0;
+		return (0);
+
+	/* if no mode selected use default */
 	/* select function */
-
-
-	return (int);
+	select_function(opcode, data, line_number, mode);
+	return (mode);
 }
 
 
-void select_function()
+void select_function(char *opcode, char *data, int line_number, int mode)
 {
 	/* push pall and friends */
 	int i;
@@ -70,21 +100,62 @@ void select_function()
 	int fnf; 
 
 	instruction_t functions[] = {
-		{"push", add_node},
-		{"pall", print_list}
+		{"push", push},
+		{"pall", pall},
+		{"pop", pop}
+		{"add", add},
+		{"nop", nop},
+		{"sub", sub},
+		{"div", div},
+		{"mul", mul},
+		{"mod", mod},
+		{"pint", pint},
+		{NULL, NULL}
 	};
 
-	for (/*nodes in instructions */)
+	/* comment */
+	if (opcode[0] == "#")
+		return;
+
+	for (i = 0, fnf = 1; functions[i].opcode != NULL; i++)
 	{
-		if (/* item in instructions == opcode */)
+		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
-			call_function(functions[i].f, opcode, value, line, mode);
+			call_function(functions[i].f, opcode, data, line_nunmber, mode);
+			/* function match */
+			fnf = 0;
 		}
 	}
+	/* reach this point */
+	/* fnf still 1 = error */
+	if (fnf == 1)
+		error_handle();
 }
 
-void call_function(/* params from select */)
+void call_function(point_f f, char opcode, char *data, int line_number, int mode)
 {
-	/* do stuff */
-	pall(n, line*, opcode)
+	stack_t *node;
+
+	if (mode == 1)
+	{
+		/* send mode to function */
+		/* will queue */
+		printf("Mode: 1 queue");
+	}
+	else
+	{
+		/* continue stack */
+		printf("Mode: 0 stack");
+	}
+
+	if (strcmp(opcode, "push") == 0)
+	{
+		node = new_node(atoi(data));
+		if (mode == 0)
+			f(&node, line_number);
+		if (mode == 1)
+			push_queue(&node, line_number);
+	}
+	else
+		f(&head, line_number);
 }
