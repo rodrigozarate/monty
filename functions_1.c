@@ -7,7 +7,7 @@
 #include "header_monty.h"
 
 /**
- * push - Pushes an element to the stack.
+ * push - Pushes an element to the stack .
  * @stack: Struct with the element's stack.
  * @line_number: Number to push in the stack.
  * @number: Integer to be inserted.

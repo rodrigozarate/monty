@@ -8,7 +8,7 @@
 
 /**
  * sub - Subtracts the top element of the stack
- * from the second top element of the stack.
+ *  from the second top element of the stack.
  * @stack: Struct with the element's stack.
  * @line_number: Struct with the element's stack.
  * Return: void
