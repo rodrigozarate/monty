@@ -40,10 +40,19 @@ void parse_file(FILE *monty_file)
 	int line_number;
 	size_t buf;
 	/* default mode stack */
-	int mode = 0;
-	
-	/* check for errors */
-	for (line = 1; getline(&p_line, &buf, monty_file != EOF; line_number++)  
+	int mode;
+	char *p_line;
+
+	mode = 0;
+	p_line = NULL;
+	buf = 0;
+
+	/* cant open file */
+	if (monty_file == NULL)
+		error_handle(7, monty_file);
+
+	/* walk file */
+	for (line_number = 1; getline(&p_line, &buf, monty_file) != EOF; line_number++)  
 	{
 		line_slice = parse_line(p_line, line_number, mode);
 	}
@@ -59,11 +68,27 @@ int parse_line(char *p_line, int line_number, int mode)
 
 	if (p_line == NULL)
 		error_handle(6);
-	/* do the strok  */
+
+	separator ="\n ";
+	opcode = strtok(p_line, separator);
+
+	/* no content in line */
+	if (opcode == NULL)
+		return (0);
+	data = strtok(NULL, separator);
+
+	/* select mode */
+	if (strcmp(opcode, "queue") == 0)
+		mode = 1;
+		return (1);
+	else if (strcmp(opcode, "stack") == 0)
+		mode = 0;
+		return (0);
+
+	/* if no mode selected use default */
 	/* select function */
-
-
-	return (int);
+	select_function(opcode, data, line_number, mode);
+	return (mode);
 }
 
 
