@@ -15,13 +15,18 @@
 void open_file(char *file_name)
 {
 	FILE *monty_file;
+	int file_exists;
 
-	if (filename == NULL)
-		error_handle(X, file_name);
+	file_exists = access(file_name, F_OK);
+	if (file_exists == -1)
+		error_handle(5, file_name);
+
+	if (file_name == NULL)
+		error_handle(5, file_name);
 
 	monty_file = fopen(file_name, "r");
 	if (monty_file == NULL)
-		error_handle(X, file_name);
+		error_handle(5, file_name);
 
 	/* reach this point */
 	/* convert file into instructions */
@@ -81,4 +86,5 @@ void select_function()
 void call_function(/* params from select */)
 {
 	/* do stuff */
+	pall(n, line*, opcode)
 }
