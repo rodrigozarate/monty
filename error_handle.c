@@ -6,22 +6,22 @@
 
 /*
 * If the user does not give any file or more than one argument to your program,
-* print the error message USAGE: monty file, followed by a new line, 
-* and exit with the status EXIT_FAILURE
+* print the error message USAGE: monty file, followed by a new line,
+*  and exit with the status EXIT_FAILURE
 *
 * If, for any reason, it’s not possible to open the file,
 * print the error message Error: Can't open file <file>,
 * followed by a new line, and exit with the status EXIT_FAILURE
 * where <file> is the name of the file
 *
-* If the file contains an invalid instruction, print the error message 
-* L<line_number>: unknown instruction <opcode>, followed by a new line,
+* If the file contains an invalid instruction, print the error message
+*  L<line_number>: unknown instruction <opcode>, followed by a new line,
 * and exit with the status EXIT_FAILURE
 * where is the line number where the instruction appears.
 * Line numbers always start at 1
 *
-* If you can’t malloc anymore, print the error message 
-* Error: malloc failed, followed by a new line,
+* If you can’t malloc anymore, print the error message
+*  Error: malloc failed, followed by a new line,
 * and exit with status EXIT_FAILURE.
 */
 
@@ -43,14 +43,36 @@ void error_handle(int error_code, ...)
 	va_start(error_list, error_code);
 	switch (error_code)
 	{
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		default;
-			break;
+	case 1:
+		fprintf(stderr, "L%d: usage: push integer\n",
+			line_number);
+		exit(EXIT_FAILURE);
+		break;
+	case 2:
+		fprintf(stderr, "L%d: can't pint, stack empty\n",
+			line_number);
+		exit(EXIT_FAILURE);
+		break;
+	case 3:
+		fprintf(stderr, "L%d: can't pop an empty stack\n",
+			line_number);
+		exit(EXIT_FAILURE);
+		break;
+	case 4:
+		fprintf(stderr, "L%d: can't swap, stack too short\n",
+			line_number);
+		exit(EXIT_FAILURE);
+		break;
+	case 5:
+		fprintf(stderr, "L%d: can't add, stack too short\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	case 6:
+		fprintf(stderr, "L%d: malloc fail\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	default;
+	break;
 	}
 	/* free list nodes */
 	/* exit */
