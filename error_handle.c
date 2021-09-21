@@ -67,9 +67,15 @@ void error_handle(int error_code, ...)
 		fprintf(stderr, "L%d: can't add, stack too short\n",
 			line_number);
 		exit(EXIT_FAILURE);
+		break;
 	case 6:
 		fprintf(stderr, "L%d: malloc fail\n",
 			line_number);
+		exit(EXIT_FAILURE);
+		break;
+	case 7:
+		printf("Error: Can't open file %s\n",
+		       va_arg(error_list, char *));
 		exit(EXIT_FAILURE);
 	default;
 	break;
