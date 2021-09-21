@@ -88,7 +88,7 @@ void add(stack_t **stack, unsigned int line_number)
 		error_handle(5, line_number);
 
 	*stack = current->next;
-	(*stack)->next->n += stack->n;
+	(*stack)->next->n += (*stack)->n;
 	if (current->next)
 		current->next->prev = NULL;
 	free(current);
