@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 {
 	/* too much or too many arguments */
 	if (argc < 2 || argc > 2)
-		/* error hamndling */
+		/* error handling */
 
 	/* Reach this point read the file */
-	open(argv[1]);
+	open_file(argv[1]);
 	return (0);
 }
