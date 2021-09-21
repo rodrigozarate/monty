@@ -92,7 +92,7 @@ int parse_line(char *p_line, int line_number, int mode)
 }
 
 
-void select_function()
+void select_function(char *opcode, char *data, int line_number, int mode)
 {
 	/* push pall and friends */
 	int i;
@@ -100,17 +100,36 @@ void select_function()
 	int fnf; 
 
 	instruction_t functions[] = {
-		{"push", add_node},
-		{"pall", print_list}
+		{"push", push},
+		{"pall", pall},
+		{"pop", pop}
+		{"add", add},
+		{"nop", nop},
+		{"sub", sub},
+		{"div", div},
+		{"mul", mul},
+		{"mod", mod},
+		{"pint", pint},
+		{NULL, NULL}
 	};
 
-	for (/*nodes in instructions */)
+	/* comment */
+	if (opcode[0] == "#")
+		return;
+
+	for (i = 0, fnf = 1; functions[i].opcode != NULL; i++)
 	{
-		if (/* item in instructions == opcode */)
+		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
 			call_function(functions[i].f, opcode, value, line, mode);
+			/* function match */
+			fnf = 0;
 		}
 	}
+	/* reach this point */
+	/* fnf still 1 = error */
+	if (fnf == 1)
+		error_handle();
 }
 
 void call_function(/* params from select */)
