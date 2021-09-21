@@ -20,9 +20,6 @@
 * where is the line number where the instruction appears.
 * Line numbers always start at 1
 *
-* If you can’t malloc anymore, print the error message
-*  Error: malloc failed, followed by a new line,
-* and exit with status EXIT_FAILURE.
 */
 
 #include "header_monty.h"
@@ -69,8 +66,7 @@ void error_handle(int error_code, ...)
 		exit(EXIT_FAILURE);
 		break;
 	case 6:
-		fprintf(stderr, "L%d: malloc fail\n",
-			line_number);
+		fprintf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 		break;
 	case 7:
