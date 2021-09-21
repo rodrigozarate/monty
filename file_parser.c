@@ -121,7 +121,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	{
 		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
-			call_function(functions[i].f, opcode, data, line_nunmber, mode);
+			call_function(functions[i].f, opcode, data, line_number, mode);
 			/* function match */
 			fnf = 0;
 		}
