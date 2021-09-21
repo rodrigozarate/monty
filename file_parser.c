@@ -34,11 +34,13 @@ void parse_file(FILE *monty_file)
 {
 	int line;
 	size_t buf;
+	/* default mode stack */
+	mode = 0;
 	
 	/* check for errors */
 	for (line = 1; getline(&p_line, &buf, monty_file != EOF; line++)  
 	{
-		line_slice = parse_line(p_line, line, 0);
+		line_slice = parse_line(p_line, line, mode);
 	}
 	free(p_line);
 }
@@ -58,9 +60,25 @@ int parse_line(char *p_line, int line, line_slice)
 void select_function()
 {
 	/* push pall and friends */
+	int i;
+	/* function not found */
+	int fnf; 
+
+	instruction_t functions[] = {
+		{"push", add_node},
+		{"pall", print_list}
+	};
+
+	for (/*nodes in instructions */)
+	{
+		if (/* item in instructions == opcode */)
+		{
+			call_function(functions[i].f, opcode, value, line, mode);
+		}
+	}
 }
 
-void call_function()
+void call_function(/* params from select */)
 {
 	/* do stuff */
 }
