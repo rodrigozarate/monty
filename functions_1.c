@@ -12,24 +12,14 @@
  * @line_number: Number to push in the stack.
  * Return: void.
  */
-void push(stack **stack, unsigned int line_number)
+void push(stack **stack, unsigned int line_number, int number)
 {
 	stack_t *new_node;
-
-	if (!stack)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n",
-			line_number);
-		exit(EXIT_FAILURE);
-	}
+	int copy_n = number;
 
 	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n",
-			line_number);
-		exit(EXIT_FAILURE);
-	}
+		error_handle(6, line_number);
 
 	new_node->n = number;
 	new_node->next = *stack;
@@ -66,11 +56,7 @@ void pop(stack_t **stack, unsigned int line_number)
 	stack_t *current = *stack;
 
 	if (!stack)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n",
-			line_number);
-		exit(EXIT_FAILURE);
-	}
+		error_handle(3, line_number);
 
 	*stack = *current->next;
 	if (*current->next)
@@ -97,11 +83,8 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 
 	if (count < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n",
-			line_number);
-		exit(EXIT_FAILURE);
-	}
+		error_handle(5, line_number);
+
 	*stack = *current->next;
 	*stack->next->n += stack->n;
 	if (*current->next)
