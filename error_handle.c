@@ -54,6 +54,10 @@ void error_handle(int error_code, ...)
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
 			printf("Error: Can't open file %s\n", va_arg(error_list, char *));
 			break;
 		default;
