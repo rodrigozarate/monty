@@ -19,14 +19,14 @@ void open_file(char *file_name)
 
 	file_exists = access(file_name, F_OK);
 	if (file_exists == -1)
-		error_handle(5, file_name);
+		error_handle(7, file_name);
 
 	if (file_name == NULL)
-		error_handle(5, file_name);
+		error_handle(7, file_name);
 
 	monty_file = fopen(file_name, "r");
 	if (monty_file == NULL)
-		error_handle(5, file_name);
+		error_handle(7, file_name);
 
 	/* reach this point */
 	/* convert file into instructions */
