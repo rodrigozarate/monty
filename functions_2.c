@@ -31,7 +31,7 @@ void sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	*stack = current->next;
-	(*stack)->next->n -= n;
+	(*stack)->next->n -= (*stack)->n;
 	if (current->next)
 		current->next->prev = NULL;
 	free(current);
@@ -44,7 +44,7 @@ void sub(stack_t **stack, unsigned int line_number)
  * @line_number: Struct with the element's stack.
  * Return: void
  */
-void div(stack_t **stack, unsigned int line_number)
+void _div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 	int count = 1;

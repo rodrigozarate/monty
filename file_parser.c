@@ -106,7 +106,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
-		{"div", div},
+		{"div", _div},
 		{"mul", mul},
 		{"mod", mod},
 		{"pint", pint},
