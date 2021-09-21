@@ -1,5 +1,5 @@
 /*
-* monty.c - interpret monty opcodes
+* functions_2.c - File with helper functions.
 * Autor: Cristian Oliveros and Rodrigo Zárate A.
 * Date: September 20, 2021
 */
@@ -129,4 +129,19 @@ void mod(stack_t **stack, unsigned int line_number)
 	if (*current->next)
 		*current->next->prev = NULL;
 	free(current);
+}
+
+/**
+ * pchar - Prints the char at the top of the
+ * stack, followed by a new line.
+ * @stack: Struct with the element's stack.
+ * @line_number: Struct with the element's stack.
+ * Return: void
+ */
+void pchar(stack_t **stack, unsigned int line_number)
+{
+	if (*stack->n >= 0 && *stack->n <= 255)
+		printf("%c\n", *stack->n);
+	else
+		error_handle(8, line_number);
 }

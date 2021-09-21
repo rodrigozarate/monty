@@ -1,5 +1,5 @@
 /*
-* monty.c - interpret monty opcodes
+* functions_1.c - File with helper functions.
 * Autor: Cristian Oliveros and Rodrigo Zárate A.
 * Date: September 20, 2021
 */
@@ -10,9 +10,10 @@
  * push - Pushes an element to the stack.
  * @stack: Struct with the element's stack.
  * @line_number: Number to push in the stack.
+ * @number: Integer to be inserted.
  * Return: void.
  */
-void push(stack **stack, unsigned int line_number, int number)
+void push(stack_t **stack, unsigned int line_number, int number)
 {
 	stack_t *new_node;
 	int copy_n = number;
