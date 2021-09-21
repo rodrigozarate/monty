@@ -121,7 +121,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	{
 		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
-			call_function(functions[i].f, opcode, value, line, mode);
+			call_function(functions[i].f, opcode, data, line_nunmber, mode);
 			/* function match */
 			fnf = 0;
 		}
@@ -132,8 +132,30 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		error_handle();
 }
 
-void call_function(/* params from select */)
+void call_function(point_f f, char opcode, char *data, int line_number, int mode)
 {
-	/* do stuff */
-	pall(n, line*, opcode)
+	stack_t *node;
+
+	if (mode == 1)
+	{
+		/* send mode to function */
+		/* will queue */
+		printf("Mode: 1 queue");
+	}
+	else
+	{
+		/* continue stack */
+		printf("Mode: 0 stack");
+	}
+
+	if (strcmp(opcode, "push") == 0)
+	{
+		node = new_node(atoi(data));
+		if (mode == 0)
+			f(&node, line_number);
+		if (mode == 1)
+			push_queue(&node, line_number);
+	}
+	else
+		f(&head, line_number);
 }
