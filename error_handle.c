@@ -14,12 +14,6 @@
 * followed by a new line, and exit with the status EXIT_FAILURE
 * where <file> is the name of the file
 *
-* If the file contains an invalid instruction, print the error message
-*  L<line_number>: unknown instruction <opcode>, followed by a new line,
-* and exit with the status EXIT_FAILURE
-* where is the line number where the instruction appears.
-* Line numbers always start at 1
-*
 */
 
 #include "header_monty.h"
@@ -43,36 +37,33 @@ void error_handle(int error_code, ...)
 	case 1:
 		fprintf(stderr, "L%d: usage: push integer\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 2:
 		fprintf(stderr, "L%d: can't pint, stack empty\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 3:
 		fprintf(stderr, "L%d: can't pop an empty stack\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 4:
 		fprintf(stderr, "L%d: can't swap, stack too short\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 5:
 		fprintf(stderr, "L%d: can't add, stack too short\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 6:
 		fprintf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
 		break;
 	case 7:
 		printf("Error: Can't open file %s\n",
 		       va_arg(error_list, char *));
-		exit(EXIT_FAILURE);
+	case 8:
+		line_number = va_arg(error_list, int);
+		opcode = va_arg(error_list, char *);
+		printf("L%d: unknown instruction %s\n", line_number, opcode);
 	default;
 	break;
 	/* free list nodes */
