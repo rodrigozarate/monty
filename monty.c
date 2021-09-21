@@ -23,3 +23,22 @@ int main(int argc, char **argv)
 	open_file(argv[1]);
 	return (0);
 }
+
+/**
+* new_node - Create a space in memory
+* @n: int
+* Return: pointer or NULL
+*/
+
+stack_t *new_node(int n)
+{
+	stack_t *node;
+
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+		err(6);
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+	return (node);
+}
