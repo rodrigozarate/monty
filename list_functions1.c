@@ -1,10 +1,23 @@
-#include ".h"
+/*
+* monty.c - interpret monty opcodes
+* Autor: Cristian Oliveros and Rodrigo Zárate A.
+* Date: September 20, 2021
+*/
 
+#include "header_monty.h"
 
-void add_node(**stack, const int n)
+/**
+* add_node - add node to the top
+* @stack: pointer header
+* @n: value int
+* Return: void
+*/
+
+void add_node(stack_t **stack, const int n)
 {
 	/* add node to the top of stack */
-	struct *newnode;
+	stack_t *newnode;
+
 	newnode = malloc(sizeof(struct));
 	if (newnode == NULL)
 		return (1);
@@ -17,7 +30,13 @@ void add_node(**stack, const int n)
 	*stack = newnode;
 }
 
-void print_list(**stack)
+/**
+* print_list - print list from top
+* @stack: pointer to head
+* Return: void
+*/
+
+void print_list(stack_t **stack)
 {
 	int i;
 	/* print nodes from top to bottom */
