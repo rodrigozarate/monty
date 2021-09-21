@@ -79,7 +79,6 @@ void error_handle(int error_code, ...)
 		exit(EXIT_FAILURE);
 	default;
 	break;
-	}
 	/* free list nodes */
 	/* exit */
 	exit(EXIT_FAILURE);
