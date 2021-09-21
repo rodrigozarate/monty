@@ -37,23 +37,28 @@ void open_file(char *file_name)
 
 void parse_file(FILE *monty_file)
 {
-	int line;
+	int line_number;
 	size_t buf;
 	/* default mode stack */
-	mode = 0;
+	int mode = 0;
 	
 	/* check for errors */
-	for (line = 1; getline(&p_line, &buf, monty_file != EOF; line++)  
+	for (line = 1; getline(&p_line, &buf, monty_file != EOF; line_number++)  
 	{
-		line_slice = parse_line(p_line, line, mode);
+		line_slice = parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
 
 
-int parse_line(char *p_line, int line, line_slice)
+int parse_line(char *p_line, int line_number, int mode)
 {
+	char *opcode
+	char *data
+	const char *separator
 
+	if (p_line == NULL)
+		error_handle(6);
 	/* do the strok  */
 	/* select function */
 
