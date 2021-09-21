@@ -12,7 +12,7 @@
  * @line_number: Number to push in the stack.
  * Return: void.
  */
-void push(stack **stack, unsigned int line_number)
+void push(stack **stack, unsigned int line_number, int number)
 {
 	stack_t *new_node;
 	int copy_n = number;
