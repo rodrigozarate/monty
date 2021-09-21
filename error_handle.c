@@ -23,27 +23,27 @@ void error_handle(int error_code, ...)
 	switch (error_code)
 	{
 	case 1:
-		printf(stderr, "L%d: usage: push integer\n",
+		printf("L%d: usage: push integer\n",
 			line_number);
 		break;
 	case 2:
-		printf(stderr, "L%d: can't pint, stack empty\n",
+		printf("L%d: can't pint, stack empty\n",
 			line_number);
 		break;
 	case 3:
-		printf(stderr, "L%d: can't pop an empty stack\n",
+		printf("L%d: can't pop an empty stack\n",
 			line_number);
 		break;
 	case 4:
-		printf(stderr, "L%d: can't swap, stack too short\n",
+		printf("L%d: can't swap, stack too short\n",
 			line_number);
 		break;
 	case 5:
-		printf(stderr, "L%d: can't add, stack too short\n",
+		printf("L%d: can't add, stack too short\n",
 			line_number);
 		break;
 	case 6:
-		fprintf("Error: malloc failed\n");
+		printf("Error: malloc failed\n");
 		break;
 	case 7:
 		printf("Error: Can't open file %s\n",
