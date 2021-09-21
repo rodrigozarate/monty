@@ -44,10 +44,17 @@ void error_handle(int error_code, ...)
 	switch (error_code)
 	{
 		case 1:
+			fprintf(stderr, "L%d: usage: push integer\n", error_list->line_number);
+                	exit(EXIT_FAILURE);
 			break;
 		case 2:
 			break;
 		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			printf("Error: Can't open file %s\n", va_arg(error_list, char *));
 			break;
 		default;
 			break;
