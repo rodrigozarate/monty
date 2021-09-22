@@ -57,7 +57,8 @@ void open_file(char *file_name);
 void parse_file(FILE *monty_file);
 int parse_line(char *p_line, int line_number, int mode);
 void select_function(char *opcode, char *data, int line_number, int mode);
-void call_function(point_f f, char *opcode, char *data, int line_number, int mode);
+void call_function(point_f f,
+		char *opcode, char *data, int line_number, int mode);
 
 /* functions_1.c */
 void push(stack_t **stack, unsigned int line_number);
