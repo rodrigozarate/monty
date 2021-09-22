@@ -122,7 +122,7 @@ void mod(stack_t **stack, unsigned int line_number)
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = stack*;
+	stack_t *tmp = *stack;
 
 	if (!tmp)
 	{
