@@ -32,7 +32,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	while (*stack)
 	{
 		count++;
-		*tack = (*stack)->next;
+		*stack = (*stack)->next;
 	}
 
 	if (count < 2)
@@ -42,7 +42,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	{
 		tmp = (*stack)->n;
 		(*stack)->n = (*stack)->next->n;
-		(*stack)->next->n = tmp
+		(*stack)->next->n = tmp;
 	}
 }
 
@@ -57,14 +57,16 @@ void pstr(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 
 	if (!stack)
-		printf("\n"),
-			return;
+	{
+		printf("\n");
+		return;
+	}
 	while (*stack)
 	{
 		if ((*stack)->n > 0 && (*stack)->n <= 255)
 			printf("%c\n", (*stack)->n);
 		else
-			breack;
+			break;
 		*stack = (*stack)->next;
 	}
 }
@@ -77,8 +79,10 @@ void pstr(stack_t **stack, unsigned int line_number)
  */
 void rotl(stack_t **stack, unsigned int line_number)
 {
+	stack_t *tmp1, *tmp2;
+
 	(void)line_number;
-	stack_t *tmp1 = *stack, *tmp2;
+       	tmp1 = *stack;
 
 	while (tmp1->next)
 		tmp1 = tmp1->next;
