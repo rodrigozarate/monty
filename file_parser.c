@@ -70,7 +70,7 @@ void parse_file(FILE *monty_file)
 			getline(&p_line, &buf, monty_file) != EOF;
 			line_number++)
 	{
-		parse_line(p_line, line_number, mode);
+		mode = parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
@@ -189,7 +189,7 @@ void call_function(point_f f, char *opcode, char *data,
 			sign = -1;
 		}
 		if (data == NULL)
-			error_handle(1, line_number);
+			error_handle(6);
 
 		while (data[i] != '\0')
 		{
