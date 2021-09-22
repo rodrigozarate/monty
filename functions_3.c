@@ -4,7 +4,7 @@
  * Date: September 20, 2021
  */
 
-#include "header_monty.h"
+#include "monty.h"
 
 /**
  * pint - Prints the value at the top of the stack, followed by a new line.

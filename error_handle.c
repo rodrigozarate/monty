@@ -4,7 +4,7 @@
 * Date: September 20, 2021
 */
 
-#include "header_monty.h"
+#include "monty.h"
 
 /**
 * error_handle - Shows erros acordingly to code

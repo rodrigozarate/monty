@@ -4,7 +4,7 @@
 * Date: September 20, 2021
 */
 
-#include "header_monty.h"
+#include "monty.h"
 
 /**
  * sub - Subtracts the top element of the stack
