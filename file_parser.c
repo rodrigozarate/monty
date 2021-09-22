@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "header_monty.h"
+#include "monty.h"
 
 /**
 * open_file - Open monty files .m
