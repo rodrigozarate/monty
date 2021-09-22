@@ -70,7 +70,7 @@ void parse_file(FILE *monty_file)
 			getline(&p_line, &buf, monty_file) != EOF;
 			line_number++)
 	{
-		mode = parse_line(p_line, line_number, mode);
+		parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
