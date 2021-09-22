@@ -27,23 +27,15 @@ void pint(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	int tmp = 0, count = 1;
+	int tmp = 0;
 
-	while (*stack)
-	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
+	if (!*stack || !stack || !(*stack)->next)
 		error_handle(4, line_number);
 
-	while (*stack)
-	{
-		tmp = (*stack)->n;
-		(*stack)->n = (*stack)->next->n;
-		(*stack)->next->n = tmp;
-	}
+	tmp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = tmp;
+
 }
 
 /**
@@ -63,12 +55,13 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	while (*stack)
 	{
-		if ((*stack)->n > 0 && (*stack)->n <= 255)
-			printf("%c\n", (*stack)->n);
+		if ((*stack)->n > 0 && (*stack)->n <= 127)
+			printf("%c", (*stack)->n);
 		else
 			break;
 		*stack = (*stack)->next;
 	}
+	printf("\n");
 }
 
 /**
@@ -79,20 +72,22 @@ void pstr(stack_t **stack, unsigned int line_number)
  */
 void rotl(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp1, *tmp2;
-
+	stack_t *tmp;
 	(void)line_number;
-       	tmp1 = *stack;
+       	tmp = *stack;
 
-	while (tmp1->next)
-		tmp1 = tmp1->next;
+	if (!*stack || !(*stack)->next)
+		return;
 
-	tmp2 = tmp1->prev;
-	tmp2->next = NULL;
-	tmp1->prev = NULL;
-	tmp1->next = *stack;
-	(*stack)->prev = tmp1;
-	*stack = tmp1;
+	while (!tmp)
+		tmp = tmp->next;
+
+	*stack = (*stack)->next;
+	tmp->next = (*stack)->prev;
+	(*stack)->prev = NULL;
+	tmp->next->prev = tmp;
+	tmp = tmp->next;
+	tmp->next = NULL;
 }
 
 /**

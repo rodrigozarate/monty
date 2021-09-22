@@ -6,16 +6,16 @@
 
 #include "monty.h"
 
+stack_t *stk_head = NULL;
+
 /**
 * main - Entry Point
 * @argc: counter arguments
 * @argv: Array of arguments
 * Return: 0
 */
-
 int main(int argc, char **argv)
 {
-	stack_t *stk_head = NULL;
 	/* too much or too many arguments */
 	if (argc < 2 || argc > 2)
 		error_handle1(10);

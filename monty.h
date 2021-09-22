@@ -56,12 +56,15 @@ void error_handle1(int error_code, ...);
 void open_file(char *file_name);
 void parse_file(FILE *monty_file);
 int parse_line(char *p_line, int line_number, int mode);
-void select_function(char *opcode, char *data, int line_number, int mode);
-void call_function(point_f f,
-		char *opcode, char *data, int line_number, int mode);
+void select_function(char *opcode, char *data,
+		int line_number, int mode);
+void call_function(point_f f, char *opcode, char *data,
+		int line_number, int mode);
+/* monty.c */
+void push(stack_t **stack, unsigned int line_number);
+void push_queue(stack_t **stack, unsigned int line_number);
 
 /* functions_1.c */
-void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
@@ -75,7 +78,6 @@ void mod(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 
 /* functions_3.c upsidedown */
-void push_queue(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);

@@ -6,6 +6,7 @@
 
 #include "monty.h"
 
+
 /**
  * push - Pushes an element to the stack.
  * @stack: Struct with the element's stack.
@@ -32,6 +33,7 @@ void push(stack_t **stack, unsigned int line_number)
 	stk_head->next = node_to_stack;;
 	node_to_stack->prev = stk_head;
 }
+
 
 /**
  * pall - prints all the values on the stack,
@@ -66,14 +68,13 @@ void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
-	if (!stack)
+	if (!stack || !*stack)
 		error_handle(3, line_number);
 
 	*stack = current->next;
 	if (current->next)
 		current->next->prev = NULL;
 	free(current);
-
 }
 
 /**
@@ -85,21 +86,13 @@ void pop(stack_t **stack, unsigned int line_number)
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
-	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
+	if (!*stack || !stack || !(*stack)->next)
 		error_handle(5, line_number);
 
-	*stack = current->next;
 	(*stack)->next->n += (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 

@@ -16,29 +16,21 @@
 void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
+	if (!stack || !*stack || !(*stack)->next)
 	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n",
+		fprintf(stderr, "L%d: can't sub, stack too short\n",
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	*stack = current->next;
 	(*stack)->next->n -= (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 
 /**
- * div - Divides the second top element of
+ * _div - Divides the second top element of
  * the stack by the top element of the stack.
  * @stack: Struct with the element's stack.
  * @line_number: Struct with the element's stack.
@@ -47,24 +39,24 @@ void sub(stack_t **stack, unsigned int line_number)
 void _div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
+	if (!*stack || !stack || !(*stack)->next)
 	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n",
+		fprintf(stderr, "L%d: can't div, stack too short\n",
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	*stack = current->next;
-	(*stack)->next->n = (*stack)->next->n / (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n = (*stack)->n / (*stack)->next->n;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 
@@ -78,24 +70,16 @@ void _div(stack_t **stack, unsigned int line_number)
 void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
+	if (!*stack || !stack || !(*stack)->next)
 	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n",
+		fprintf(stderr, "L%d: can't mul, stack too short\n",
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	*stack = current->next;
 	(*stack)->next->n = (*stack)->next->n * (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 
@@ -110,24 +94,16 @@ void mul(stack_t **stack, unsigned int line_number)
 void mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
+	if (!*stack || !stack || !(*stack)->next)
 	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n",
+		fprintf(stderr, "L%d: can't mod, stack too short\n",
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	*stack = current->next;
-	(*stack)->next->n = (*stack)->next->n % (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+	(*stack)->next->n = (*stack)->n % (*stack)->next->n;
+	 *stack = (*stack)->next;
+	 (*stack)->prev = NULL;
 	free(current);
 }
 
@@ -140,8 +116,19 @@ void mod(stack_t **stack, unsigned int line_number)
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
-	if ((*stack)->n >= 0 && (*stack)->n <= 255)
+	if (!*stack || !stack)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n >= 0 && (*stack)->n <= 127)
 		printf("%c\n", (*stack)->n);
 	else
-		error_handle(8, line_number);
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	}
 }

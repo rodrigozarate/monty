@@ -52,7 +52,6 @@ void error_handle(int error_code, ...)
 		       va_arg(error_list, char *));
 		break;
 	case 8:
-		opcode = va_arg(error_list, char *);
 		printf("L%d: unknown instruction %s\n", line_number, opcode);
 		break;
 	default:
@@ -76,10 +75,10 @@ void error_handle1(int error_code, ...)
         char *opcode;
         int line_number;
 
+	va_start(error_list, error_code);
 	line_number = va_arg(error_list, int);
 	opcode = va_arg(error_list, char *);
 
-        va_start(error_list, error_code);
         switch (error_code)
         {
 	case 10:

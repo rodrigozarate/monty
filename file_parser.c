@@ -129,7 +129,8 @@ int parse_line(char *p_line, int line_number, int mode)
  * @line_number: int
  * @mode: FIFO or LIFO
  */
-void select_function(char *opcode, char *data, int line_number, int mode)
+void select_function(char *opcode, char *data,
+		int line_number, int mode)
 {
 	int i;
 	/* function not found */
@@ -147,6 +148,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		{"mod", mod},
 		{"pint", pint},
 		{"swap", swap},
+		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"push_queue", push_queue},
@@ -159,8 +161,8 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	{
 		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
-			call_function(functions[i].f, opcode,
-					data, line_number, mode);
+			call_function(functions[i].f, opcode, data,
+					line_number, mode);
 			fnf = 0;
 		}
 	}
@@ -176,8 +178,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
  * @line_number: int
  * @mode: FIFO or LIFO
  */
-void call_function(point_f f,
-		char *opcode, char *data,
+void call_function(point_f f, char *opcode, char *data,
 		int line_number, int mode)
 {
 	int i = 0;
