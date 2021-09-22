@@ -25,34 +25,34 @@ void error_handle(int error_code, ...)
 	switch (error_code)
 	{
 	case 1:
-		printf("L%d: usage: push integer\n",
+		fprintf(stderr, "L%d: usage: push integer\n",
 			line_number);
 		break;
 	case 2:
-		printf("L%d: can't pint, stack empty\n",
+		fprintf(stderr, "L%d: can't pint, stack empty\n",
 			line_number);
 		break;
 	case 3:
-		printf("L%d: can't pop an empty stack\n",
+		fprintf(stderr, "L%d: can't pop an empty stack\n",
 			line_number);
 		break;
 	case 4:
-		printf("L%d: can't swap, stack too short\n",
+		fprintf(stderr, "L%d: can't swap, stack too short\n",
 			line_number);
 		break;
 	case 5:
-		printf("L%d: can't add, stack too short\n",
+		fprintf(stderr, "L%d: can't add, stack too short\n",
 			line_number);
 		break;
 	case 6:
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		break;
 	case 7:
-		printf("Can't open file %s\n",
+		fprintf(stderr, "Can't open file %s\n",
 		       va_arg(error_list, char *));
 		break;
 	case 8:
-		printf("L%d: unknown instruction %s\n", line_number, opcode);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		break;
 	default:
 		break;
@@ -82,13 +82,13 @@ void error_handle1(int error_code, ...)
         switch (error_code)
         {
 	case 10:
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		break;
 	case 11:
-		printf("L%d", line_number);
+		fprintf(stderr, "L%d", line_number);
 		break;
 	case 12:
-		printf("L%s", opcode);
+		fprintf(stderr, "L%s", opcode);
 		break;
 	default:
 		break;

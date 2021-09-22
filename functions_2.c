@@ -54,7 +54,7 @@ void _div(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	(*stack)->next->n = (*stack)->n / (*stack)->next->n;
+	(*stack)->next->n = (*stack)->next->n / (*stack)->n;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	free(current);
@@ -101,9 +101,15 @@ void mod(stack_t **stack, unsigned int line_number)
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	(*stack)->next->n = (*stack)->n % (*stack)->next->n;
-	 *stack = (*stack)->next;
-	 (*stack)->prev = NULL;
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n",
+			line_number);
+		exit(EXIT_FAILURE);
+	}
+	(*stack)->next->n = (*stack)->next->n % (*stack)->n;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 
@@ -123,9 +129,9 @@ void pchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if ((*stack)->n >= 0 && (*stack)->n <= 127)
+	if ((*stack)->n >= 32 && (*stack)->n <= 126)
 		printf("%c\n", (*stack)->n);
-	else
+	else if ((*stack)->n < 32 || (*stack)->n > 126)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n",
 			line_number);
