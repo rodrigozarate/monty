@@ -192,7 +192,7 @@ void call_function(point_f f, char *opcode, char *data,
 				error_handle(1, line_number);
 			i++;
 		}
-		node = new_node(atoi(data) * sign);
+		node = new_node(atoi(data));
 		if (mode == 0)
 		{
 			f(&node, line_number);
