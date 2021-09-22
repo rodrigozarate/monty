@@ -4,6 +4,8 @@
 * Date: September 20, 2021
 */
 
+#include <stdio.h>
+#include <string.h>
 #include "header_monty.h"
 
 /**
@@ -52,9 +54,10 @@ void parse_file(FILE *monty_file)
 		error_handle(7, monty_file);
 
 	/* walk file */
-	for (line_number = 1; getline(&p_line, &buf, monty_file) != EOF; line_number++)  
+	for (line_number = 1;
+		getline(&p_line, &buf, monty_file) != EOF; line_number++)  
 	{
-		line_slice = parse_line(p_line, line_number, mode);
+		parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
@@ -62,9 +65,9 @@ void parse_file(FILE *monty_file)
 
 int parse_line(char *p_line, int line_number, int mode)
 {
-	char *opcode
-	char *data
-	const char *separator
+	char *opcode;
+	char *data;
+	const char *separator;
 
 	if (p_line == NULL)
 		error_handle(6);
@@ -79,11 +82,15 @@ int parse_line(char *p_line, int line_number, int mode)
 
 	/* select mode */
 	if (strcmp(opcode, "queue") == 0)
+	{
 		mode = 1;
 		return (1);
+	}
 	else if (strcmp(opcode, "stack") == 0)
+	{
 		mode = 0;
 		return (0);
+	}
 
 	/* if no mode selected use default */
 	/* select function */
@@ -129,7 +136,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	/* reach this point */
 	/* fnf still 1 = error */
 	if (fnf == 1)
-		error_handle();
+		error_handle(8, line_number, opcode);
 }
 
 void call_function(point_f f, char opcode, char *data, int line_number, int mode)

@@ -16,13 +16,16 @@
 void error_handle(int error_code, ...)
 {
 	va_list error_list;
-	char *text_line;
 	int line_number;
+	char *opcode;
+
+	line_number = va_arg(error_list, int);
 
 	va_start(error_list, error_code);
 	switch (error_code)
 	{
 	case 1:
+
 		printf("L%d: usage: push integer\n",
 			line_number);
 		break;
@@ -54,7 +57,7 @@ void error_handle(int error_code, ...)
 		opcode = va_arg(error_list, char *);
 		printf("L%d: unknown instruction %s\n", line_number, opcode);
 		break;
-	default;
+	default:
 		break;
 	}
 	/* To do free list nodes */
@@ -72,8 +75,11 @@ void error_handle(int error_code, ...)
 void error_handle1(int error_code, ...)
 {
         va_list error_list;
-        char *text_line;
+        char *opcode;
         int line_number;
+
+	line_number = va_arg(error_list, int);
+	opcode = va_arg(error_list, char *);
 
         va_start(error_list, error_code);
         switch (error_code)
@@ -81,11 +87,14 @@ void error_handle1(int error_code, ...)
 	case 10:
 		printf("USAGE: monty file\n");
 		break;
-	default;
+	case 11:
+		printf("L%d", line_number);
+		break;
+	case 12:
+		printf("L%s", opcode);
+		break;
+	default:
 		break;
 	}
 	exit(EXIT_FAILURE);
 }
-
-
-
