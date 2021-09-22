@@ -178,16 +178,11 @@ void call_function(point_f f, char *opcode, char *data,
 		int line_number, int mode)
 {
 	int i = 0;
-	int sign;
+
 	stack_t *node;
 
 	if (strcmp(opcode, "push") == 0)
 	{	
-		if (data != NULL && data[0] == '-')
-		{
-			data = data + 1;
-			sign = -1;
-		}
 		if (data == NULL)
 			error_handle(6);
 
