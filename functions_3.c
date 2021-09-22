@@ -101,19 +101,27 @@ void rotl(stack_t **stack, unsigned int line_number)
  * @line_number: Integer to be inserted.
  * Return: Void.
  */
-void push_queue(stack_t **stack, unsigned int line_number)
+void push_queue(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-	/* todo change this function */
-	stack_t *tmp1, *tmp2;
 
-        (void)line_number;
-	while (tmp1->next)
-                tmp1 = tmp1->next;
+	stack_t *tmp1;
 
-        tmp2 = tmp1->prev;
-        tmp2->next = NULL;
-        tmp1->prev = NULL;
-        tmp1->next = *stack;
-        (*stack)->prev = tmp1;
-        *stack = tmp1;
+	if (stack == NULL || *stack == NULL)
+		exit(EXIT_FAILURE);
+
+	if (stk_head == NULL)
+	{
+		stk_head = *stack;
+		return;
+	}
+
+	tmp1 = stk_head;
+	/* walk nodes */
+	while (tmp1->next != NULL)
+		tmp1 = tmp1->next;
+
+	/*reach the end */
+	tmp1->next = *stack;
+	(*stack)->prev = tmp1;
 }

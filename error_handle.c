@@ -49,7 +49,7 @@ void error_handle(int error_code, ...)
 		printf("Error: malloc failed\n");
 		break;
 	case 7:
-		printf("Error: Can't open file %s\n",
+		printf("Can't open file %s\n",
 		       va_arg(error_list, char *));
 		break;
 	case 8:

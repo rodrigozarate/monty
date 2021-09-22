@@ -1,7 +1,7 @@
 /*
-* monty.c - interpret monty opcodes
+* file_parser.c - interpret monty opcodes
 * Autor: Cristian Oliveros and Rodrigo Zárate A.
-* Date: September 20, 2021
+* Date: September 21, 2021
 */
 
 #define _GNU_SOURCE
@@ -24,15 +24,21 @@ void open_file(char *file_name)
 
 	file_exists = access(file_name, F_OK);
 	if (file_exists == -1)
+	{
+		printf("Error: ");
 		error_handle(7, file_name);
-
+	}
 	if (file_name == NULL)
+	{
+		printf("Error: ");
 		error_handle(7, file_name);
-
+	}
 	monty_file = fopen(file_name, "r");
 	if (monty_file == NULL)
+	{
+		printf("Error: ");
 		error_handle(7, file_name);
-
+	}
 	/* reach this point */
 	/* convert file into instructions */
 	parse_file(monty_file);
@@ -54,7 +60,10 @@ void parse_file(FILE *monty_file)
 
 	/* cant open file */
 	if (monty_file == NULL)
+	{
+		printf("Error: ");
 		error_handle(7, monty_file);
+	}
 
 	/* walk file */
 	for (line_number = 1;
@@ -76,13 +85,14 @@ int parse_line(char *p_line, int line_number, int mode)
 		error_handle(6);
 
 	separator ="\n ";
+	/* get opcode first token */
 	opcode = strtok(p_line, separator);
 
 	/* no content in line */
 	if (opcode == NULL)
 		return (0);
+	/* get data next token in line */
 	data = strtok(NULL, separator);
-
 	/* select mode */
 	if (strcmp(opcode, "queue") == 0)
 	{
@@ -119,10 +129,16 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		{"div", _div},
 		{"mul", mul},
 		{"mod", mod},
+		{"pint", pint},
+		{"swap", swap},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"push_queue", push_queue},
 		{NULL, NULL}
 	};
 
 	/* comment */
+	/* dont go further skip and parse next line */
 	if (opcode[0] == '#')
 		return;
 
@@ -130,7 +146,8 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	{
 		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
-			call_function(functions[i].f, opcode, data, line_number, mode);
+			call_function(functions[i].f, opcode,
+					data, line_number, mode);
 			/* function match */
 			fnf = 0;
 		}
@@ -149,22 +166,29 @@ void call_function(point_f f, char *opcode, char *data, int line_number, int mod
 	{
 		/* send mode to function */
 		/* will queue */
-		printf("Mode: 1 queue");
 	}
 	else
 	{
 		/* continue stack */
-		printf("Mode: 0 stack");
 	}
 
 	if (strcmp(opcode, "push") == 0)
 	{
+		if (data == NULL)
+			error_handle(6);
+
 		node = new_node(atoi(data));
 		if (mode == 0)
+		{	
 			f(&node, line_number);
+		}
 		if (mode == 1)
+		{
 			push_queue(&node, line_number);
+		}
 	}
 	else
-		f(&node, line_number);
+	{
+		f(&stk_head, line_number);
+	}
 }

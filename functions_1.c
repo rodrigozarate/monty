@@ -15,17 +15,22 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node;
+	stack_t *node_to_stack;
 
-	new_node = malloc(sizeof(stack_t));
-	if (!new_node)
-		error_handle(6, line_number);
+	(void) line_number;
+	if (stack == NULL || *stack == NULL)
+		exit(EXIT_FAILURE);
 
-	new_node->next = *stack;
-	new_node->prev = NULL;
-	if (*stack)
-		(*stack)->prev = new_node;
-	*stack = new_node;
+	/* head is empty */
+	if (stk_head == NULL)
+	{
+		stk_head = *stack;
+		return;
+	}
+	node_to_stack = stk_head;
+	stk_head = *stack;
+	stk_head->next = node_to_stack;;
+	node_to_stack->prev = stk_head;
 }
 
 /**
@@ -37,12 +42,17 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
+	stack_t *tmp1;
 
-	while (*stack)
+	(void)line_number;
+	if (stack == NULL)
+		exit(EXIT_FAILURE);
+
+	tmp1 = *stack;
+	while (tmp1 != NULL)
 	{
-		printf("%d\n", (*stack)->n);
-		*stack = (*stack)->next;
+		printf("%d\n", tmp1->n);
+		tmp1 = tmp1->next;
 	}
 }
 
