@@ -48,8 +48,7 @@ void error_handle(int error_code, ...)
 		fprintf(stderr, "Error: malloc failed\n");
 		break;
 	case 7:
-		fprintf(stderr, "Can't open file %s\n",
-		       va_arg(error_list, char *));
+		fprintf(stderr, "Can't open file %s\n", opcode);
 		break;
 	case 8:
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
