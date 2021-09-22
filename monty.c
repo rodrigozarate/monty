@@ -5,7 +5,6 @@
 */
 
 #include "monty.h"
-stack_t *stk_head = NULL;
 
 /**
 * main - Entry Point
@@ -51,6 +50,7 @@ stack_t *new_node(int n)
 void free_stack(void)
 {
 	stack_t *tmp1;
+
 	if (stk_head == NULL)
 		return;
 	/* walk nodes in stack */
