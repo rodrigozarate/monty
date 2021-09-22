@@ -1,8 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define _GNU_SOURCE
-
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -53,7 +51,7 @@ void open_file(char *file_name);
 void parse_file(FILE *monty_file);
 int parse_line(char *p_line, int line_number, int mode);
 void select_function(char *opcode, char *data, int line_number, int mode);
-void call_function(point_f f, char opcode, char *data, int line_number, int mode);
+void call_function(point_f f, char *opcode, char *data, int line_number, int mode);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);

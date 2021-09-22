@@ -7,13 +7,13 @@
 #include "header_monty.h"
 
 /**
- * _push - Pushes an element to the stack.
+ * push - Pushes an element to the stack.
  * @stack: Struct with the element's stack.
  * @line_number: Number to push in the stack.
  * @number: Integer to be inserted.
  * Return: void.
  */
-void _push(stack_t **stack, unsigned int line_number, int number)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node;
 
@@ -21,7 +21,6 @@ void _push(stack_t **stack, unsigned int line_number, int number)
 	if (!new_node)
 		error_handle(6, line_number);
 
-	new_node->n = number;
 	new_node->next = *stack;
 	new_node->prev = NULL;
 	if (*stack)

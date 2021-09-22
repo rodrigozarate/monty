@@ -4,6 +4,8 @@
 * Date: September 20, 2021
 */
 
+#define _GNU_SOURCE
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -108,7 +110,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	int fnf; 
 
 	instruction_t functions[] = {
-		{"push", _push},
+		{"push", push},
 		{"pall", pall},
 		{"pop", pop},
 		{"add", add},
@@ -121,7 +123,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	};
 
 	/* comment */
-	if (opcode[0] == "#")
+	if (opcode[0] == '#')
 		return;
 
 	for (i = 0, fnf = 1; functions[i].opcode != NULL; i++)
@@ -139,7 +141,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		error_handle(8, line_number, opcode);
 }
 
-void call_function(point_f f, char opcode, char *data, int line_number, int mode)
+void call_function(point_f f, char *opcode, char *data, int line_number, int mode)
 {
 	stack_t *node;
 
@@ -164,5 +166,5 @@ void call_function(point_f f, char opcode, char *data, int line_number, int mode
 			push_queue(&node, line_number);
 	}
 	else
-		f(&head, line_number);
+		f(&node, line_number);
 }
