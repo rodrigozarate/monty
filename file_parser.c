@@ -25,18 +25,15 @@ void open_file(char *file_name)
 	file_exists = access(file_name, F_OK);
 	if (file_exists == -1)
 	{
-		printf("Error: ");
 		error_handle(7, file_name);
 	}
 	if (file_name == NULL)
 	{
-		printf("Error: ");
 		error_handle(7, file_name);
 	}
 	monty_file = fopen(file_name, "r");
 	if (monty_file == NULL)
 	{
-		printf("Error: ");
 		error_handle(7, file_name);
 	}
 	/* reach this point */
@@ -65,7 +62,6 @@ void parse_file(FILE *monty_file)
 	/* cant open file */
 	if (monty_file == NULL)
 	{
-		printf("Error: ");
 		error_handle(7, monty_file);
 	}
 
