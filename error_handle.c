@@ -19,13 +19,12 @@ void error_handle(int error_code, ...)
 	int line_number;
 	char *opcode;
 
-	line_number = va_arg(error_list, int);
-
 	va_start(error_list, error_code);
+	line_number = va_arg(error_list, int);
+	opcode = va_arg(error_list, char *);
 	switch (error_code)
 	{
 	case 1:
-
 		printf("L%d: usage: push integer\n",
 			line_number);
 		break;
@@ -53,7 +52,6 @@ void error_handle(int error_code, ...)
 		       va_arg(error_list, char *));
 		break;
 	case 8:
-		line_number = va_arg(error_list, int);
 		opcode = va_arg(error_list, char *);
 		printf("L%d: unknown instruction %s\n", line_number, opcode);
 		break;

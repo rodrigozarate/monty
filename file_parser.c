@@ -160,6 +160,8 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 
 void call_function(point_f f, char *opcode, char *data, int line_number, int mode)
 {
+	int i = 0;
+
 	stack_t *node;
 
 	if (mode == 1)
@@ -177,6 +179,12 @@ void call_function(point_f f, char *opcode, char *data, int line_number, int mod
 		if (data == NULL)
 			error_handle(6);
 
+		while(data[i] != '\0')
+		{
+			if (isdigit(data[i]) == 0)
+				error_handle(1, line_number);
+			i++;
+		}
 		node = new_node(atoi(data));
 		if (mode == 0)
 		{	
