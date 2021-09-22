@@ -23,7 +23,7 @@ void sub(stack_t **stack, unsigned int line_number)
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	(*stack)->next->n = (*stack)->n - (*stack)->next->n;
+	(*stack)->next->n -= (*stack)->n;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	free(current);
