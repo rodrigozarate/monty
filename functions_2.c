@@ -135,8 +135,5 @@ void pchar(stack_t **stack, unsigned int line_number)
 			line_number);
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		printf("%c\n", (*stack)->n);
-	}
+	printf("%c\n", (*stack)->n);
 }
