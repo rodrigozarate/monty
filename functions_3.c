@@ -94,3 +94,26 @@ void rotl(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = tmp1;
 	*stack = tmp1;
 }
+
+/**
+ * push_queue - put node at the end
+ * @stack: Struct with the element's stack.
+ * @line_number: Integer to be inserted.
+ * Return: Void.
+ */
+void push_queue(stack_t **stack, unsigned int line_number)
+{
+	/* todo change this function */
+	stack_t *tmp1, *tmp2;
+
+        (void)line_number;
+	while (tmp1->next)
+                tmp1 = tmp1->next;
+
+        tmp2 = tmp1->prev;
+        tmp2->next = NULL;
+        tmp1->prev = NULL;
+        tmp1->next = *stack;
+        (*stack)->prev = tmp1;
+        *stack = tmp1;
+}
