@@ -178,23 +178,18 @@ void call_function(point_f f, char *opcode, char *data,
 		int line_number, int mode)
 {
 	int i = 0;
-
+	int sign;
 	stack_t *node;
 
-	if (mode == 1)
-	{
-		/* send mode to function */
-		/* will queue */
-	}
-	else
-	{
-		/* continue stack */
-	}
-
 	if (strcmp(opcode, "push") == 0)
-	{
+	{	
+		if (data != NULL && data[0] == '-')
+		{
+			data = data + 1;
+			sign = -1;
+		}
 		if (data == NULL)
-			error_handle(6);
+			error_handle(1, line_number);
 
 		while (data[i] != '\0')
 		{
@@ -202,7 +197,7 @@ void call_function(point_f f, char *opcode, char *data,
 				error_handle(1, line_number);
 			i++;
 		}
-		node = new_node(atoi(data));
+		node = new_node(atoi(data) * sign);
 		if (mode == 0)
 		{
 			f(&node, line_number);
