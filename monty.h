@@ -46,7 +46,7 @@ extern stack_t *stk_head;
 
 typedef void (*point_f)(stack_t **, unsigned int);
 stack_t *new_node(int n);
-void free_stack(void);
+void free_stack(stack_t *stk_head);
 
 /* error handle */
 void error_handle(int error_code, ...);

@@ -46,6 +46,10 @@ void open_file(char *file_name)
 	fclose(monty_file);
 }
 
+/**
+ * parse_file - cut file into lines
+ * @monty_file: file to be cutted
+ */
 void parse_file(FILE *monty_file)
 {
 	int line_number;
@@ -67,14 +71,21 @@ void parse_file(FILE *monty_file)
 
 	/* walk file */
 	for (line_number = 1;
-		getline(&p_line, &buf, monty_file) != EOF; line_number++)  
+			getline(&p_line, &buf, monty_file) != EOF;
+			line_number++)
 	{
 		parse_line(p_line, line_number, mode);
 	}
 	free(p_line);
 }
 
-
+/**
+ * parse_line - cut line into tokens
+ * @p_line: pointer to buffer with line
+ * @line_number: int
+ * @mode: mode LIFO or FIFO
+ * Return: int - mode
+ */
 int parse_line(char *p_line, int line_number, int mode)
 {
 	char *opcode;
@@ -84,7 +95,7 @@ int parse_line(char *p_line, int line_number, int mode)
 	if (p_line == NULL)
 		error_handle(6);
 
-	separator ="\n ";
+	separator = "\n ";
 	/* get opcode first token */
 	opcode = strtok(p_line, separator);
 
@@ -111,13 +122,18 @@ int parse_line(char *p_line, int line_number, int mode)
 	return (mode);
 }
 
-
+/**
+ * select_function - Select function based on opcode
+ * @opcode: pointer
+ * @data: info in node
+ * @line_number: int
+ * @mode: FIFO or LIFO
+ */
 void select_function(char *opcode, char *data, int line_number, int mode)
 {
-	/* push pall and friends */
 	int i;
 	/* function not found */
-	int fnf; 
+	int fnf;
 
 	instruction_t functions[] = {
 		{"push", push},
@@ -137,28 +153,32 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		{NULL, NULL}
 	};
 
-	/* comment */
-	/* dont go further skip and parse next line */
 	if (opcode[0] == '#')
 		return;
-
 	for (i = 0, fnf = 1; functions[i].opcode != NULL; i++)
 	{
 		if (strcmp(opcode, functions[i].opcode) == 0)
 		{
 			call_function(functions[i].f, opcode,
 					data, line_number, mode);
-			/* function match */
 			fnf = 0;
 		}
 	}
-	/* reach this point */
-	/* fnf still 1 = error */
 	if (fnf == 1)
 		error_handle(8, line_number, opcode);
 }
 
-void call_function(point_f f, char *opcode, char *data, int line_number, int mode)
+/**
+ * call_function - Execute function
+ * @f: function
+ * @opcode: char
+ * @data: char
+ * @line_number: int
+ * @mode: FIFO or LIFO
+ */
+void call_function(point_f f,
+		char *opcode, char *data,
+		int line_number, int mode)
 {
 	int i = 0;
 
@@ -179,7 +199,7 @@ void call_function(point_f f, char *opcode, char *data, int line_number, int mod
 		if (data == NULL)
 			error_handle(6);
 
-		while(data[i] != '\0')
+		while (data[i] != '\0')
 		{
 			if (isdigit(data[i]) == 0)
 				error_handle(1, line_number);
@@ -187,7 +207,7 @@ void call_function(point_f f, char *opcode, char *data, int line_number, int mod
 		}
 		node = new_node(atoi(data));
 		if (mode == 0)
-		{	
+		{
 			f(&node, line_number);
 		}
 		if (mode == 1)

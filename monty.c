@@ -15,13 +15,14 @@
 
 int main(int argc, char **argv)
 {
+	stack_t *stk_head = NULL;
 	/* too much or too many arguments */
 	if (argc < 2 || argc > 2)
 		error_handle1(10);
 
 	/* Reach this point read the file */
 	open_file(argv[1]);
-	free_stack();
+	free_stack(stk_head);
 	return (0);
 }
 
@@ -46,8 +47,9 @@ stack_t *new_node(int n)
 
 /**
  * free_stack - frees the stack
+ * @stk_head: head to refer
  */
-void free_stack(void)
+void free_stack(stack_t *stk_head)
 {
 	stack_t *tmp1;
 
