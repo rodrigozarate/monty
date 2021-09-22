@@ -42,9 +42,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern stack_t *stk_head;
 
 typedef void (*point_f)(stack_t **, unsigned int);
 stack_t *new_node(int n);
+void free_stack(void);
 
 /* error handle */
 void error_handle(int error_code, ...);
@@ -77,7 +79,5 @@ void rotl(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
-
-extern stack_t *stk_head;
 
 #endif /* MONTY_H */
