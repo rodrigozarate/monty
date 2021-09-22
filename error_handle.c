@@ -46,6 +46,7 @@ void error_handle(int error_code, ...)
 		break;
 	case 6:
 		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
 		break;
 	case 7:
 		printf("Can't open file %s\n",

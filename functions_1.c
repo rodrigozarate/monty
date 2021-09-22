@@ -66,7 +66,7 @@ void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
-	if (!stack)
+	if (!stack || !*stack)
 		error_handle(3, line_number);
 
 	*stack = current->next;
@@ -85,21 +85,16 @@ void pop(stack_t **stack, unsigned int line_number)
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
-	int count = 1;
 
-	while (*stack)
-	{
-		count++;
-		*stack = (*stack)->next;
-	}
-
-	if (count < 2)
+	if (!*stack || !stack || !(*stack)->next)
 		error_handle(5, line_number);
 
-	*stack = current->next;
+	/*if (!(*stack)->next)
+	  error_handle(5, line_number);*/
+
 	(*stack)->next->n += (*stack)->n;
-	if (current->next)
-		current->next->prev = NULL;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 	free(current);
 }
 

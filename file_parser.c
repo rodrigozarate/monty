@@ -131,6 +131,7 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 		{"mod", mod},
 		{"pint", pint},
 		{"swap", swap},
+		{"pchar", pchar},
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"push_queue", push_queue},
