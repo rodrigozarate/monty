@@ -45,27 +45,39 @@ typedef struct instruction_s
 
 typedef void (*point_f)(stack_t **, unsigned int);
 stack_t *new_node(int n);
+
+/* error handle */
 void error_handle(int error_code, ...);
 void error_handle1(int error_code, ...);
+
+/* process file */
 void open_file(char *file_name);
 void parse_file(FILE *monty_file);
 int parse_line(char *p_line, int line_number, int mode);
 void select_function(char *opcode, char *data, int line_number, int mode);
 void call_function(point_f f, char *opcode, char *data, int line_number, int mode);
+
+/* functions_1.c */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+
+/* functions_2.c */
 void sub(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
+
+/* functions_3.c upsidedown */
 void push_queue(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+
+extern stack_t *stk_head;
 
 #endif /* MONTY_H */
