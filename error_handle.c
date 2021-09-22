@@ -4,27 +4,6 @@
 * Date: September 20, 2021
 */
 
-/*
-* If the user does not give any file or more than one argument to your program,
-* print the error message USAGE: monty file, followed by a new line,
-*  and exit with the status EXIT_FAILURE
-*
-* If, for any reason, it’s not possible to open the file,
-* print the error message Error: Can't open file <file>,
-* followed by a new line, and exit with the status EXIT_FAILURE
-* where <file> is the name of the file
-*
-* If the file contains an invalid instruction, print the error message
-*  L<line_number>: unknown instruction <opcode>, followed by a new line,
-* and exit with the status EXIT_FAILURE
-* where is the line number where the instruction appears.
-* Line numbers always start at 1
-*
-* If you can’t malloc anymore, print the error message
-*  Error: malloc failed, followed by a new line,
-* and exit with status EXIT_FAILURE.
-*/
-
 #include "header_monty.h"
 
 /**
@@ -37,49 +16,85 @@
 void error_handle(int error_code, ...)
 {
 	va_list error_list;
-	char *text_line;
 	int line_number;
+	char *opcode;
+
+	line_number = va_arg(error_list, int);
 
 	va_start(error_list, error_code);
 	switch (error_code)
 	{
 	case 1:
-		fprintf(stderr, "L%d: usage: push integer\n",
+
+		printf("L%d: usage: push integer\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 2:
-		fprintf(stderr, "L%d: can't pint, stack empty\n",
+		printf("L%d: can't pint, stack empty\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 3:
-		fprintf(stderr, "L%d: can't pop an empty stack\n",
+		printf("L%d: can't pop an empty stack\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 4:
-		fprintf(stderr, "L%d: can't swap, stack too short\n",
+		printf("L%d: can't swap, stack too short\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 5:
-		fprintf(stderr, "L%d: can't add, stack too short\n",
+		printf("L%d: can't add, stack too short\n",
 			line_number);
-		exit(EXIT_FAILURE);
 		break;
 	case 6:
-		fprintf(stderr, "L%d: malloc fail\n",
-			line_number);
-		exit(EXIT_FAILURE);
+		printf("Error: malloc failed\n");
 		break;
 	case 7:
 		printf("Error: Can't open file %s\n",
 		       va_arg(error_list, char *));
-		exit(EXIT_FAILURE);
-	default;
-	break;
-	/* free list nodes */
+		break;
+	case 8:
+		line_number = va_arg(error_list, int);
+		opcode = va_arg(error_list, char *);
+		printf("L%d: unknown instruction %s\n", line_number, opcode);
+		break;
+	default:
+		break;
+	}
+	/* To do free list nodes */
 	/* exit */
+	exit(EXIT_FAILURE);
+}
+
+/**
+* error_handle1 - Shows erros acordingly to code
+* @error_code: code to select error to show
+* Return: Error
+*
+*/
+
+void error_handle1(int error_code, ...)
+{
+        va_list error_list;
+        char *opcode;
+        int line_number;
+
+	line_number = va_arg(error_list, int);
+	opcode = va_arg(error_list, char *);
+
+        va_start(error_list, error_code);
+        switch (error_code)
+        {
+	case 10:
+		printf("USAGE: monty file\n");
+		break;
+	case 11:
+		printf("L%d", line_number);
+		break;
+	case 12:
+		printf("L%s", opcode);
+		break;
+	default:
+		break;
+	}
 	exit(EXIT_FAILURE);
 }
