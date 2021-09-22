@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "header_monty.h"
 
 /**
@@ -107,16 +108,15 @@ void select_function(char *opcode, char *data, int line_number, int mode)
 	int fnf; 
 
 	instruction_t functions[] = {
-		{"push", push},
+		{"push", _push},
 		{"pall", pall},
-		{"pop", pop}
+		{"pop", pop},
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
 		{"div", _div},
 		{"mul", mul},
 		{"mod", mod},
-		{"pint", pint},
 		{NULL, NULL}
 	};
 
