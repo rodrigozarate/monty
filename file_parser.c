@@ -25,16 +25,16 @@ void open_file(char *file_name)
 	file_exists = access(file_name, F_OK);
 	if (file_exists == -1)
 	{
-		error_handle(7, file_name);
+		error_handle1(7, file_name);
 	}
 	if (file_name == NULL)
 	{
-		error_handle(7, file_name);
+		error_handle1(7, file_name);
 	}
 	monty_file = fopen(file_name, "r");
 	if (monty_file == NULL)
 	{
-		error_handle(7, file_name);
+		error_handle1(7, file_name);
 	}
 	/* reach this point */
 	/* convert file into instructions */
@@ -62,7 +62,7 @@ void parse_file(FILE *monty_file)
 	/* cant open file */
 	if (monty_file == NULL)
 	{
-		error_handle(7, monty_file);
+		error_handle1(7, monty_file);
 	}
 
 	/* walk file */
@@ -164,7 +164,7 @@ void select_function(char *opcode, char *data,
 	}
 	if (fnf == 1)
 	{
-		error_handle(8, line_number, opcode);
+		error_handle1(8, line_number, opcode);
 	}
 }
 

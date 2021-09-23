@@ -16,8 +16,6 @@
 void error_handle(int error_code, ...)
 {
 	va_list error_list;
-	int lin_n;
-	char *err_c;
 
 	va_start(error_list, error_code);
 
@@ -63,13 +61,15 @@ void error_handle(int error_code, ...)
 void error_handle1(int error_code, ...)
 {
 	va_list error_list;
+	int lin_n;
+	char *err_c;
 
 	va_start(error_list, error_code);
 
 	switch (error_code)
 	{
 	case 7:
-		fprintf(stderr, "Can't open file %s\n",
+		fprintf(stderr, "Error: Can't open file %s\n",
 				va_arg(error_list, char *));
 		break;
 	case 8:
