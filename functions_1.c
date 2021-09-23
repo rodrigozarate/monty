@@ -11,7 +11,6 @@
  * push - Pushes an element to the stack.
  * @stack: Struct with the element's stack.
  * @line_number: Number to push in the stack.
- * @number: Integer to be inserted.
  * Return: void.
  */
 void push(stack_t **stack, unsigned int line_number)
@@ -30,7 +29,7 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	node_to_stack = stk_head;
 	stk_head = *stack;
-	stk_head->next = node_to_stack;;
+	stk_head->next = node_to_stack;
 	node_to_stack->prev = stk_head;
 }
 

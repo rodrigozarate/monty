@@ -18,6 +18,7 @@ void error_handle(int error_code, ...)
 	va_list error_list;
 	int lin_n;
 	char *err_c;
+
 	va_start(error_list, error_code);
 
 	switch (error_code)
@@ -45,22 +46,10 @@ void error_handle(int error_code, ...)
 	case 6:
 		fprintf(stderr, "Error: malloc failed\n");
 		break;
-	case 7:
-		fprintf(stderr, "Can't open file %s\n",
-				va_arg(error_list, char *));
-		break;
-	case 8:
-		lin_n = va_arg(error_list, int);
-		err_c = va_arg(error_list, char *);
-		fprintf(stderr, "L%d: unknown instruction %s\n",
-				lin_n, err_c);
-		break;
 	default:
 		break;
 	}
-	/* To do free list nodes */
 	va_end(error_list);
-	/* exit */
 	exit(EXIT_FAILURE);
 }
 
@@ -73,12 +62,25 @@ void error_handle(int error_code, ...)
 
 void error_handle1(int error_code, ...)
 {
-        va_list error_list;
+	va_list error_list;
 
 	va_start(error_list, error_code);
 
-        switch (error_code)
-        {
+	switch (error_code)
+	{
+	case 7:
+		fprintf(stderr, "Can't open file %s\n",
+				va_arg(error_list, char *));
+		break;
+	case 8:
+		lin_n = va_arg(error_list, int);
+		err_c = va_arg(error_list, char *);
+		fprintf(stderr, "L%d: unknown instruction %s\n",
+				lin_n, err_c);
+		break;
+	case 9:
+		fprintf(stderr, "USAGE: monty file\n");
+		break;
 	case 10:
 		fprintf(stderr, "USAGE: monty file\n");
 		break;
