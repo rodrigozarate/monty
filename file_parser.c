@@ -163,7 +163,9 @@ void select_function(char *opcode, char *data,
 		}
 	}
 	if (fnf == 1)
+	{
 		error_handle(8, line_number, opcode);
+	}
 }
 
 /**
@@ -182,7 +184,7 @@ void call_function(point_f f, char *opcode, char *data,
 	stack_t *node;
 
 	if (strcmp(opcode, "push") == 0)
-	{	
+	{
 		if (data == NULL)
 			error_handle(6);
 
