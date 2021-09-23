@@ -186,7 +186,7 @@ void call_function(point_f f, char *opcode, char *data,
 	if (strcmp(opcode, "push") == 0)
 	{
 		if (data == NULL)
-			error_handle(6);
+			error_handle(1, line_number);
 
 		while (data[i] != '\0')
 		{
