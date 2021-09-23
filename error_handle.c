@@ -16,7 +16,8 @@
 void error_handle(int error_code, ...)
 {
 	va_list error_list;
-
+	int lin_n;
+	char *err_c;
 	va_start(error_list, error_code);
 
 	switch (error_code)
@@ -49,8 +50,10 @@ void error_handle(int error_code, ...)
 				va_arg(error_list, char *));
 		break;
 	case 8:
+		lin_n = va_arg(error_list, int);
+		err_c = va_arg(error_list, char *);
 		fprintf(stderr, "L%d: unknown instruction %s\n",
-				va_arg(error_list, int), va_arg(error_list, char *));
+				lin_n, err_c);
 		break;
 	default:
 		break;
